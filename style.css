@@ -1,0 +1,21 @@
+#pages {
+    padding: 10px ;
+}
+
+.buttons {
+    width: 100px;
+}
+.animeCard {
+    height: 300px;
+    width: 200px;
+    display: inline-block;
+}
+
+img {
+    height: inherit;
+    width: inherit;
+}
+
+#results, form {
+    text-align: center;
+}
