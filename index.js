@@ -1,5 +1,6 @@
 let search = document.getElementById("search")
 let form = document.getElementById("searchBar")
+let pageClick = document.getElementById("pages")
 
 
 let pageCount = 1
