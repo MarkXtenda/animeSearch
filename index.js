@@ -5,6 +5,7 @@ let pageClick = document.getElementById("pages")
 
 let pageCount = 1
 
+
 const mainUrl = "https://api.jikan.moe/v4/anime"
 let animeUrl = `https://api.jikan.moe/v4/anime/Naruto?page=${pageCount}`
 
