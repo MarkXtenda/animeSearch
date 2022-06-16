@@ -89,15 +89,16 @@ function nameCheck(name) {
 function pageCheckRender() {
     if (animeList.length < 25) {
         btnNext.disabled = true
-        printResult()
+        btnPrev.disabled = true
+        return printResult()
     }
     else {
         btnNext.disabled = false
-        printResult()
     }
-    // checks if the page count at 1. if so it dissables 'Previous' button
+    // Checks if the page count at 1. if so it dissables 'Previous' button
     if (pageCount.innerText == "1") {
         btnPrev.disabled = true
+        printResult()
     }
     else {
         btnPrev.disabled = false
