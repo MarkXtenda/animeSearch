@@ -38,9 +38,11 @@ let modal = document.getElementById("modal")
 
 
 function fetchFunction(url, page = "") {
+    pageClick.style.visibility = "hidden"
     fetch(url + page).then(response=>response.json()).then((list)=>{
         animeList = list.data
         pageCheckRender()
+        pageClick.style.visibility = "visible"
 })
 }
 // Print the Cards
@@ -53,13 +55,17 @@ function printResult() {
         animeImg.className = "animeCard"
         animeImg.id = anime.mal_id
         animeImg.src = anime.images.jpg.image_url
+        let animeTitle = document.createElement("p")
+        animeTitle.className = "animeCard"
+        animeTitle.id = anime.mal_id
         // Check if title have an english translation, if not just past the main title
         if (anime.title_english !== null) {
-            animeCard.innerText = anime.title_english
+            animeTitle.innerText = anime.title_english
         } else {
-            animeCard.innerText = anime.title
+            animeTitle.innerText = anime.title
         }
         animeCard.appendChild(animeImg)
+        animeCard.appendChild(animeTitle)
 
         animeResults.appendChild(animeCard)
     })
@@ -157,8 +163,8 @@ animeResults.addEventListener("click", (event)=>{
     if (event.target.className === "animeCard" && modal.style.visibility !== "visible") {
         let idishka = event.target.id
         // Detail description of animeResults
-        animeList.forEach(element => {
-            if (element.mal_id === parseInt(idishka)) {
+        animeList.forEach(ModalElement => {
+            if (ModalElement.mal_id === parseInt(idishka)) {
                 // Attaching modal Elements
                 let wrapper = document.getElementById("wrapper")
                 let infoWrapper = document.getElementById("info-wrapper")
@@ -166,21 +172,58 @@ animeResults.addEventListener("click", (event)=>{
                 let titleName = document.getElementById("title-name")
                 let image = document.getElementById("image")
                 let rating = document.getElementById("rating")
+
+                let genres = document.getElementById("genres")
+                let episodes = document.getElementById("episodes")
+                let studios = document.getElementById("studios")
                 let releaseDate = document.getElementById("release-date")
                 let description = document.getElementById("description")
 
                 modal.innerHTML = ""
                 modal.style.visibility = "visible"
+
                 // Adding detailed information about chosen tittle
-                titleName.innerText = `Title: ${element.title}`
-                image.src = element.images.jpg.large_image_url
-                rating.innerText = `Rating ${element.score}`
-                releaseDate.innerText = `Release Date: ${element.year}`
-                description.innerHTML = `Description: <br><br>${element.synopsis}`
+                titleName.innerText = `Title: ${ModalElement.title}`
+                // Image
+                image.src = ModalElement.images.jpg.large_image_url
+                // Rating of the Show
+                rating.innerText = `Rating: ${ModalElement.score} ⭐`
+                // Release Date
+                releaseDate.innerText = `Release Date: ${ModalElement.year}`
+                // Genres
+                genres.innerText = `Genres: `
+                let ModalElementGenres = ModalElement.genres
+                for (let i = 0; i < ModalElementGenres.length; i++) {
+                    genres.innerText += `${ModalElementGenres[i].name}`
+                    if (i === (ModalElementGenres.length-1)) {
+                        genres.innerText += `.`
+                    }
+                    else {
+                        genres.innerText += `, `
+                    }
+                }
+                // Total Episodes
+                episodes.innerText = `Epiodes: ${ModalElement.episodes}`
+                // Studios
+                studios.innerText = `Studios: `
+                let ModalElementsStudios = ModalElement.studios
+                for (let i = 0; i < ModalElementsStudios.length; i++) {
+                    studios.innerText += `${ModalElementsStudios[i].name}`
+                    if (i === (ModalElementsStudios.length-1)) {
+                        studios.innerText += `.`
+                    }
+                    else {
+                        studios.innerText += `, `
+                    }
+                }
+                description.innerHTML = `Description: <br><br>${ModalElement.synopsis}`
                 imageWrapper.appendChild(image)
                 infoWrapper.appendChild(titleName)
                 infoWrapper.appendChild(rating)
                 infoWrapper.appendChild(releaseDate)
+                infoWrapper.appendChild(episodes)
+                infoWrapper.appendChild(genres)
+                infoWrapper.appendChild(studios)
                 wrapper.appendChild(imageWrapper)
                 wrapper.appendChild(infoWrapper)
                 modal.appendChild(wrapper)
