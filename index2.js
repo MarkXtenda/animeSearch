@@ -4,14 +4,6 @@ let pageCount = document.getElementById("current-page")
 let search = document.getElementById("search")
 let searchText = document.getElementById("search-text")
 // URLs
-
-let url = {
-    mainUrl: "https://api.jikan.moe/v4/top/anime?limit=25",
-    animeUrl: "https://api.jikan.moe/v4/anime?q=",
-    ratingUrl: "https://api.jikan.moe/v4/anime?score=",
-    yearUrl: "https://api.jikan.moe/v4/anime?start_date="
-}
-
 let mainUrl = `https://api.jikan.moe/v4/top/anime?limit=25`
 let animeUrl = `https://api.jikan.moe/v4/anime?q=`
 let ratingUrl = `https://api.jikan.moe/v4/anime?score=`
@@ -22,11 +14,6 @@ let currentUrl
 let currentState
 // AdultContent
 let adultFilter = "&sfw"
-
-
-function fetchGenres() {
-    
-}
 
 
 let pageClick = document.getElementById("pages")
@@ -47,28 +34,34 @@ function fetchFunction(url, page = "") {
 }
 // Print the Cards
 function printResult() {
-    animeList.forEach(anime => {
-        let animeCard = document.createElement("div")
-        animeCard.className = "animeCard"
-        animeCard.id = anime.mal_id
-        let animeImg = document.createElement("img")
-        animeImg.className = "animeCard"
-        animeImg.id = anime.mal_id
-        animeImg.src = anime.images.jpg.image_url
-        let animeTitle = document.createElement("p")
-        animeTitle.className = "animeCard"
-        animeTitle.id = anime.mal_id
-        // Check if title have an english translation, if not just past the main title
-        if (anime.title_english !== null) {
-            animeTitle.innerText = anime.title_english
-        } else {
-            animeTitle.innerText = anime.title
-        }
-        animeCard.appendChild(animeImg)
-        animeCard.appendChild(animeTitle)
-
-        animeResults.appendChild(animeCard)
-    })
+    if (animeList.length) {
+        animeList.forEach(anime => {
+            let animeCard = document.createElement("div")
+            animeCard.className = "animeCard"
+            animeCard.id = anime.mal_id
+            let animeImg = document.createElement("img")
+            animeImg.className = "animeCard"
+            animeImg.id = anime.mal_id
+            animeImg.src = anime.images.jpg.image_url
+            let animeTitle = document.createElement("p")
+            animeTitle.className = "animeCard"
+            animeTitle.id = anime.mal_id
+            // Check if title have an english translation, if not just past the main title
+            if (anime.title_english !== null) {
+                animeTitle.innerText = anime.title_english
+            } else {
+                animeTitle.innerText = anime.title
+            }
+            animeCard.appendChild(animeImg)
+            animeCard.appendChild(animeTitle)
+    
+            animeResults.appendChild(animeCard)
+        })
+    } else {
+        let noResults = document.createElement("h1")
+        noResults.innerText = "No results"
+        animeResults.appendChild(noResults)
+    }
 }
 // Number Check
 function nameCheck(name) {
@@ -131,7 +124,9 @@ search.addEventListener("click", (event)=>{
 // Check if typed word is empty
     emptySearchBar(name)
     console.log(currentState)
-    if (name) { fetchFunction(currentState) }
+    if (name) { 
+        fetchFunction(currentState) 
+    }
     event.preventDefault()
 })
 

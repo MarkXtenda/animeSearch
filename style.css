@@ -1,4 +1,9 @@
-input {
+h1 {
+    color: #3A606E;
+    font-family: monospace;
+}
+
+#search, #search-text {
     height: 30px;
 }
 
