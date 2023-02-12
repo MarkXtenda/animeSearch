@@ -7,12 +7,11 @@ This is a simple Anime Search webpage that allows users to search for and view i
 * HTML
 * CSS
 * JavaScript
-Features
+## Features
 
-A clean and modern design
-A search bar to search for specific anime titles
-A list of popular anime shows to browse through
-Detailed information about each show, including a synopsis and cover image, available by clicking on a show
+* A search bar to search for specific anime titles
+* A list of popular anime shows to browse through
+* Detailed information about each show, including a synopsis and cover image, available by clicking on a show
 ## How to run
 
 Clone the repository to your local machine
