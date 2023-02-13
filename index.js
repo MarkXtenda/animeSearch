@@ -89,7 +89,7 @@ function pageCheckRender() {
         btnNext.disabled = false
     }
     // Checks if the page count at 1. if so it dissables 'Previous' button
-    if (pageCount.innerText == "1") {
+    if (pageCount.innerHTML == "1") {
         btnPrev.disabled = true
         printResult()
     }
@@ -115,7 +115,7 @@ emptySearchBar()
 search.addEventListener("click", (event)=>{
     console.log("search")
     animeResults.innerHTML = ""
-    let name = searchText.value
+    let name = searchText.value.replaceAll(" ", "_")
 // Check if typed word is actually a number or text
     nameCheck(name)
 // Establish Current State of url
@@ -125,6 +125,7 @@ search.addEventListener("click", (event)=>{
     emptySearchBar(name)
     console.log(currentState)
     if (name) { 
+        console.log(name)
         fetchFunction(currentState) 
     }
     event.preventDefault()
