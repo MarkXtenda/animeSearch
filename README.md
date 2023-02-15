@@ -1,6 +1,6 @@
 # Anime Search Webpage
 
-<p align="center">Link: https://splendorous-crisp-00fe50.netlify.app//</p>
+<p align="center">Link: https://anime-search-by-mark.netlify.app/</p>
 This is a simple Anime Search webpage that allows users to search for and view information about various anime shows.
 
 ## Technologies Used
